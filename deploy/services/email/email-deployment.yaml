@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: email
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: email
+  template:
+    metadata:
+      labels:
+        app: email
+    spec:
+      containers:
+        - name: email
+          image: huajuan6848/email:lab2
+          ports:
+            - containerPort: 8885
+          volumeMounts:
+            - name: config
+              mountPath: /app/conf/dev
+      volumes:
+        - name: config
+          configMap:
+            name: email-config

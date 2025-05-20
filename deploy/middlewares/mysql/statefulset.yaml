@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: gomall-mysql
+  labels:
+    app: gomall-mysql
+spec:
+  serviceName: gomall-mysql
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gomall-mysql
+  template:
+    metadata:
+      labels:
+        app: gomall-mysql
+    spec:
+      containers:
+        - name: gomall-mysql
+          image: mysql:latest
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "root"
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /var/lib/mysql
+            - name: init-scripts
+              mountPath: /docker-entrypoint-initdb.d
+      volumes:
+        - name: init-scripts
+          configMap:
+            name: gomall-mysql-init
+        - name: mysql-data
+          hostPath:
+            path: /mnt/mysql-data
+            type: DirectoryOrCreate

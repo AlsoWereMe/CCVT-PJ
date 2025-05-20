@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: payment-config
+data:
+  conf.yaml: |
+    kitex:
+      service: "payment"
+      address: ":8886"
+      metrics_port: ":9996"
+      log_level: info
+      log_file_name: "log/kitex.log"
+      log_max_size: 10
+      log_max_age: 3
+      log_max_backups: 50
+      
+    mysql:
+      dsn: "%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True&loc=Local"
+      username: root
+      password: root
+      address: gomall-mysql
+      port: 3306
+      database: product
+
+    rate_limiter:
+      enabled: true
+      bucket_size: 10
+      rate: 3

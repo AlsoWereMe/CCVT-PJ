@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cart
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cart
+  template:
+    metadata:
+      labels:
+        app: cart
+    spec:
+      containers:
+        - name: cart
+          image: huajuan6848/cart:lab2
+          ports:
+            - containerPort: 8883
+          volumeMounts:
+            - name: config
+              mountPath: /app/conf/dev
+      volumes:
+        - name: config
+          configMap:
+            name: cart-config

@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: user-config
+data:
+  conf.yaml: |
+    kitex:
+      service: "user"
+      address: ":8882"
+      metrics_port: ":9992"
+      log_level: debug
+      log_file_name: "log/kitex.log"
+      log_max_size: 10
+      log_max_age: 3
+      log_max_backups: 50
+      
+    mysql:
+      dsn: "%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True&loc=Local"
+      username: root
+      password: root
+      address: gomall-mysql
+      port: 3306
+      database: product
+
+    rate_limiter:
+      enabled: false
+      bucket_size: 10
+      rate: 5

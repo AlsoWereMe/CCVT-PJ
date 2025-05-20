@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gomall-mysql
+  labels:
+    app: gomall-mysql
+spec:
+  type: ClusterIP
+  selector:
+    app: gomall-mysql
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306

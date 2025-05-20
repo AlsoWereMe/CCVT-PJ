@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: email-config
+data:
+  conf.yaml: |
+    kitex:
+      service: "email"
+      address: ":8888"
+      log_level: info
+      log_file_name: "log/kitex.log"
+      log_max_size: 10
+      log_max_age: 3
+      log_max_backups: 50
+
+    nats:
+      url: "nats://gomall-nats:4222"

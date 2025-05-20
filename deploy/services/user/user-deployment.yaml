@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user
+  template:
+    metadata:
+      labels:
+        app: user
+    spec:
+      containers:
+        - name: user
+          image: huajuan6848/user:lab2
+          ports:
+            - containerPort: 8882
+          volumeMounts:
+            - name: config
+              mountPath: /app/conf/dev
+      volumes:
+        - name: config
+          configMap:
+            name: user-config

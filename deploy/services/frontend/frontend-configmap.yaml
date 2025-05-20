@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-config
+data:
+  conf.yaml: |
+    hertz:
+      address: ":8080"
+      metrics_port: 8090
+      enable_pprof: false
+      enable_gzip: true
+      enable_access_log: true
+      log_level: info
+      log_file_name: "log/hertz.log"
+      log_max_size: 10
+      log_max_age: 3
+      log_max_backups: 50
+      registry_addr: "localhost:8500"
+
+    redis:
+      address: "gomall-redis:6379"
+      username: ""
+      password: ""
+      db: 0
+
+    session_secret: fudan2025

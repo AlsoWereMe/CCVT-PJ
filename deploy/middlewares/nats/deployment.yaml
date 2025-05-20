@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gomall-nats
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gomall-nats
+  template:
+    metadata:
+      labels:
+        app: gomall-nats
+    spec:
+      containers:
+        - name: nats
+          image: nats:latest
+          ports:
+            - containerPort: 4222
+            - containerPort: 8222
