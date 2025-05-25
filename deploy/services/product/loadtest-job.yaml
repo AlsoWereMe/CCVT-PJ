@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: loadtest
+spec:
+  template:
+    spec:
+      containers:
+      - name: ab
+        image: alpine/bombardier
+        command: ["/bin/sh", "-c"]
+        args: ["bombardier -c 100 -n 1000 http://product:8881/"]
+      restartPolicy: Never
