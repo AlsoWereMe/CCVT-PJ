@@ -1,0 +1,65 @@
+# Kubernetes Monitor Configuration
+kubeconfig_path: "kind-kubeconfig.yaml"
+namespace: "default"
+
+# Services to monitor and test
+services:
+  - name: "frontend"
+    port: 8080
+    health_endpoint: "/"
+    test_endpoint: "/"
+    expected_status: 200
+    
+  - name: "cart"
+    port: 8883
+    health_endpoint: "/health"
+    test_endpoint: "/"
+    expected_status: 200
+    
+  - name: "checkout"
+    port: 8884
+    health_endpoint: "/health"
+    test_endpoint: "/"
+    expected_status: 200
+    
+  - name: "email"
+    port: 8885
+    health_endpoint: "/health"
+    test_endpoint: "/"
+    expected_status: 200
+    
+  - name: "order"
+    port: 8885
+    health_endpoint: "/health"
+    test_endpoint: "/"
+    expected_status: 200
+    
+  - name: "payment"
+    port: 8886
+    health_endpoint: "/health"
+    test_endpoint: "/"
+    expected_status: 200
+    
+  - name: "product"
+    port: 8881
+    health_endpoint: "/health"
+    test_endpoint: "/"
+    expected_status: 200
+    
+  - name: "user"
+    port: 8882
+    health_endpoint: "/health"
+    test_endpoint: "/"
+    expected_status: 200
+
+# Monitoring settings
+monitoring:
+  timeout: 10
+  retry_count: 3
+  retry_delay: 2
+  
+# Alert thresholds
+thresholds:
+  max_restarts: 5
+  max_response_time: 5.0
+  min_ready_pods: 11 
